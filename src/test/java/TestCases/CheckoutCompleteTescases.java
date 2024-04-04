@@ -1,0 +1,73 @@
+package TestCases;
+
+import BaseClass.BaseClass;
+import DriverActions.DriverActions;
+import PageObjects.*;
+import Utilities.Logs;
+import Utilities.Utils;
+import org.testng.annotations.*;
+
+public class CheckoutCompleteTescases extends BaseClass {
+
+    public LoginPage loginPage;
+    public HomePage homePage;
+    public yourCartPage yourCartPage;
+    public CheckoutInfoPage checkoutInfoPage;
+    public CheckoutOverviewPage checkoutOverviewPage;
+    public CheckoutCompletePage checkoutCompletePage;
+
+    @BeforeMethod(groups = {"Sanity","Smoke","Regression"})
+    public void SetUp() throws Exception{
+        LaunchBrowser();
+    }
+
+    @AfterMethod(groups = {"Sanity","Smoke","Regression"})
+    public void Teardown(){
+        CloseBrowser();
+    }
+
+
+    public void navigateToCheckoutPage() throws Exception{
+        loginPage = new LoginPage();
+        loginPage.Login(Utils.getConfigUserName(),Utils.getConfigPassword());
+        homePage = new HomePage();
+
+
+        if (homePage.isCartEmpty()){
+            homePage.FirstProductAddtocartClick();
+        }
+        DriverActions.waitForSeconds(5);
+        yourCartPage = homePage.ValidateShopingCartButton();
+        DriverActions.waitForSeconds(3);
+
+        checkoutInfoPage = yourCartPage.checkOutClick();
+        DriverActions.waitForSeconds(3);
+
+        checkoutInfoPage.fillIntheInfo("Aditya","N","431007");
+
+        checkoutOverviewPage = checkoutInfoPage.continueClick();
+
+        checkoutCompletePage = checkoutOverviewPage.finishClick();
+    }
+
+    @Test(groups = "Sanity")
+    public void validateHeader() throws Exception{
+
+        navigateToCheckoutPage();
+        checkoutCompletePage.validateLogo("Swag Labs");
+        checkoutCompletePage.validateTitle("Checkout: Complete!");
+
+    }
+
+    @Test(groups = {"Regression","Sanity"})
+    public void validateBody() throws Exception{
+        navigateToCheckoutPage();
+        checkoutCompletePage.validateHeaading("Thank you for your order!");
+        checkoutCompletePage.validatecompleteText("Your order has been dispatched, and will arrive just as fast as the pony can get there!");
+
+        homePage = checkoutCompletePage.backHomeClick();
+        Logs.info("Heading to Hpome Page");
+        homePage.validateTitle("Products");
+    }
+
+}

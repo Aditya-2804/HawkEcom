@@ -12,6 +12,7 @@ public class CheckoutOverViewTestCases extends BaseClass {
     public LoginPage loginPage;
     public HomePage homePage;
     public yourCartPage yourCartPage;
+
     public CheckoutInfoPage checkoutInfoPage;
 
     public CheckoutOverviewPage checkoutOverviewPage;
@@ -25,6 +26,8 @@ public class CheckoutOverViewTestCases extends BaseClass {
     public void Teardown(){
         CloseBrowser();
     }
+
+
 
 
     public void navigateToCheckoutOverView() throws Exception{

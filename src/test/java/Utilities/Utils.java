@@ -28,6 +28,20 @@ public class Utils  {
         return pro.getProperty("URLEcom");
     }
 
+    public String getConfigURLTestPage() throws Exception{
+        FileReader fileReader = new FileReader(System.getProperty("user.dir")+"\\src\\test\\resources\\configs\\config.properties");
+        Properties pro = new Properties();
+        pro.load(fileReader);
+        return pro.getProperty("URLTestPages");
+    }
+
+    public String getConfigURLPages() throws Exception{
+        FileReader fileReader = new FileReader(System.getProperty("user.dir")+"\\src\\test\\resources\\configs\\config.properties");
+        Properties pro = new Properties();
+        pro.load(fileReader);
+        return pro.getProperty("URLPages");
+    }
+
     public static String getConfigUserName() throws Exception{
         FileReader fileReader = new FileReader(System.getProperty("user.dir")+"\\src\\test\\resources\\configs\\config.properties");
         Properties pro = new Properties();

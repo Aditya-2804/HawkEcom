@@ -38,7 +38,6 @@ public class BaseClass {
                 WebDriverManager.edgedriver().setup();
                 driver.set(new EdgeDriver());
                 Logs.Debug("Launch Edge Browser Launchung");
-
             }
             if (utils.getConfigBrowser().equalsIgnoreCase("chrome")){
                 WebDriverManager.chromedriver().setup();
@@ -49,7 +48,7 @@ public class BaseClass {
                 driver.set(new SafariDriver());
             }
 //        }
-        getDriver().get(utils.getConfigURLEcom());
+        getDriver().get(utils.getConfigURLPages ());
         getDriver().manage().window().maximize();
     }
 

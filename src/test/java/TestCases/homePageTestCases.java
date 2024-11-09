@@ -9,6 +9,8 @@ import Utilities.Logs;
 import Utilities.Utils;
 import com.google.common.collect.Ordering;
 import org.apache.logging.log4j.core.config.Order;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -33,6 +35,15 @@ public class homePageTestCases extends BaseClass {
         DriverActions.waitForSeconds(3);
         loginPage.Login(Utils.getConfigUserName(),Utils.getConfigPassword());
         DriverActions.waitForSeconds(3);
+    }
+
+    @Test
+    public void testiFrames() throws Exception{
+        getDriver().get(utils.getConfigURLTestPage());
+        WebElement button = getDriver().findElement(By.id(""));
+        button.click();
+
+        WebElement iframe = getDriver().findElement(By.xpath(""));
     }
 
     @Test(groups = "Sanity")

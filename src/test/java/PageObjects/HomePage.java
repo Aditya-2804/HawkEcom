@@ -208,11 +208,13 @@ public class HomePage extends BaseClass {
         return AtoZList;
     }
 
+
     public List<String> validateNameZtoA(){
 
         Select select = new Select(sortButtoon);
         select.selectByVisibleText("Name (Z to A)");
 
+        
         List<String> nameList = new ArrayList<>();
 
         productNameList.forEach(element -> nameList.add(element.getText()));

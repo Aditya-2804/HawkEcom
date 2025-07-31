@@ -40,6 +40,8 @@ jobs:
       run: |
         stat /opt/hostedtoolcache/setup-chrome/chrome/stable/x64
         stat /opt/hostedtoolcache/setup-chrome/chromedriver/stable/x64
+        pkill -f chrome
+        pkill -f chromedriver
 
 
     - name: Build with Maven

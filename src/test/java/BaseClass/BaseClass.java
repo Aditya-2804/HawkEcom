@@ -11,6 +11,7 @@ import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.config.builder.api.PropertyComponentBuilder;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
@@ -18,6 +19,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 import java.io.File;
+import java.util.UUID;
 
 public class BaseClass {
 
@@ -41,7 +43,9 @@ public class BaseClass {
             }
             if (utils.getConfigBrowser().equalsIgnoreCase("chrome")){
                 WebDriverManager.chromedriver().setup();
-                driver.set(new ChromeDriver());
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--user-data-dir=" + System.getProperty("java.io.tmpdir") + "/chrome-" + UUID.randomUUID());
+                driver.set(new ChromeDriver(options));
             }
             if (utils.getConfigBrowser().equalsIgnoreCase("safari")){
                 WebDriverManager.safaridriver().setup();

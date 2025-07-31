@@ -30,11 +30,11 @@ jobs:
     - name: Setup Edge
       uses: browser-actions/setup-edge@v1
    
-    # - name: Setup Chrome
-    #   uses: browser-actions/setup-chrome@v2
-    #   with:
-    #     install-dependencies: true
-    #     install-chromedriver: true
+    - name: Setup Chrome
+      uses: browser-actions/setup-chrome@v2
+      with:
+        install-dependencies: true
+        install-chromedriver: true
     
     - name: Build with Maven
       run: mvn clean test -DfileName="testng_Sanity.xml"

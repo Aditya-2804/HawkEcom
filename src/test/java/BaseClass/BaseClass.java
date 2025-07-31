@@ -48,7 +48,7 @@ public class BaseClass {
                 driver.set(new SafariDriver());
             }
 //        }
-        getDriver().get(utils.getConfigURLPages ());
+        getDriver().get(utils.getConfigURLEcom());
         getDriver().manage().window().maximize();
     }
 

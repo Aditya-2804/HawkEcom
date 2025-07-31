@@ -48,6 +48,7 @@ public class probs extends BaseClass implements ITestListener {
 
 
 //        System.out.println("REverse: "+reverseStringPreserveSpaces("I am Legend"));
+        expandString("a3b4");
 //        int[] arr = {-4,4,2,5,10};
 //        for (int i = 0; i < arr.length; i++) {
 //            if (i==arr[i]){
@@ -90,18 +91,48 @@ public class probs extends BaseClass implements ITestListener {
     }
 
     public  static  String reverseStringPreserveSpaces(String string){
-        StringBuilder sb = new StringBuilder(string.trim());
+
+        //Input : I am Legend       Output: d ne gelmaiI
+
+        StringBuilder sb = new StringBuilder(string);
         sb.reverse();
+
         for (int i = 0; i < string.length(); i++) {
-            if (string.charAt(i) == ' '){
+            if (sb.charAt(i) == ' '){
+                sb.deleteCharAt(i);
+            }
+            if (string.charAt(i)==' '){
                 sb.insert(i," ");
-                System.out.println("sb: "+sb.toString()+" iCount: "+i);
             }
         }
-        sb.append("");
-
-        return  sb.toString();
+        return sb.toString();
     }
+
+    public static void expandString(String string){
+
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < string.length(); i++) {
+
+            char currentChars = string.charAt(i);
+
+            if (Character.isLetter(currentChars)){
+                if (i+1 < string.length() && Character.isDigit(string.charAt(i+1))){
+                    int count = Character.getNumericValue(string.charAt(i+1));
+                    for (int j=0; j<=count;j++){
+                        System.out.print(currentChars);
+                        sb.append(currentChars);
+                    }
+                }
+            }
+
+        }
+        System.out.println(sb);
+    }
+
+
+
+
     public static void readvalueFromExcel(String filepath,String sheetName,String columnOfValue,
                                      String columnOfCorrespondingValue, String correspondinValue) throws Exception{
 

@@ -9,6 +9,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import javax.swing.*;
@@ -235,7 +236,7 @@ public class Tests extends BaseClass {
     }
 
 
-    @Test
+//    @Test
     public void readData() throws Exception{
 
 //        writeData(System.getProperty("user.dir"),"TestData.xlsx","Credentials",new String[]{"WriteTo this","checking"});
@@ -245,6 +246,21 @@ public class Tests extends BaseClass {
 //        getValueFromExcel(System.getProperty("user.dir")+"/"+"TestData.xlsx","Sample","0178967409","phone","email");
         readFromExcel(System.getProperty("user.dir")+"/"+"TestData.xlsx","Sample","darrelldillon573@slingacademy.com","email","address");
 
+    }
+
+
+    @DataProvider(name="TestData")
+    public Object[][] getData(){
+        return new Object[][]{
+                {"UserAnme","Passwords"},
+                {"Adi","Pass"}
+
+        };
+    }
+
+    @Test(dataProvider = "TestData")
+    public void settingDSata(String username,String pass){
+        System.out.println("Username: "+username+" Pass: "+pass);
     }
 
 

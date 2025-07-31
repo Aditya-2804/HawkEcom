@@ -23,9 +23,13 @@ public class DriverActions extends BaseClass {
     }
 
     public static void jseClick(WebElement element){
-
         JavascriptExecutor jse = (JavascriptExecutor) getDriver();
-        jse.executeScript("arguments[0].click()",getDriver());
+        jse.executeScript("arguments[0].click()",element);
+    }
+
+    public static void jseMoveToelement(WebElement element){
+        JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+        jse.executeScript("arguments[0].scrollInto(true)",element);
     }
 
     public static void navigateBack(){
@@ -34,8 +38,9 @@ public class DriverActions extends BaseClass {
 
     public static void navigateForward(){
         getDriver().navigate().forward();
-        Logs.info("Forwarding....");
+        Logs.info("Forwarding.. ..");
     }
+
 
 
     public static String CurrentWinHandler(){
@@ -54,8 +59,6 @@ public class DriverActions extends BaseClass {
         }catch (Exception e){
             e.getMessage();
         }
-
-
         return destination;
     }
 
@@ -63,4 +66,36 @@ public class DriverActions extends BaseClass {
 //        driver.getWindowHandles().forEach(handler-> );
         getDriver().getWindowHandles().forEach(child -> getDriver().switchTo().window(child));
     }
+
+    public void jseScrollToElement(WebElement element){
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) getDriver();
+        javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);",element);
+    }
+
+    public void jseScrollBy(int x, int y){
+        JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+        jse.executeScript("window.scrollBy("+x+","+y+")");
+    }
+
+    public void jseRefresh(){
+        JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+        jse.executeScript("location.reload()");
+    }
+
+    public void jseSendKeys(String ID,String string){
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) getDriver();
+        javascriptExecutor.executeScript("document.getElementById("+ID+").value ='"+string+"';");
+    }
+
+    public void jseAlertPopUp(){
+        JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+        jse.executeScript("alert('Welcome to Daily Alerts')");
+    }
+
+    public String jseGetTitle(){
+        JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+        return jse.executeScript("return document.title").toString();
+    }
+
+
 }

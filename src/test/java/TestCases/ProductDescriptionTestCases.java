@@ -15,7 +15,7 @@ import static DriverActions.DriverActions.CurrentWinHandler;
 
 public class ProductDescriptionTestCases extends BaseClass {
 
-    @BeforeMethod(groups = {"Sanity","Smoke","Regression"})
+    @BeforeMethod(alwaysRun = true)
     public void Setup() throws Exception{
         LaunchBrowser();
     }
@@ -122,7 +122,7 @@ public class ProductDescriptionTestCases extends BaseClass {
         }
     }
 
-    @AfterMethod(groups = {"Sanity","Smoke","Regression"})
+    @AfterMethod(alwaysRun = true)
     public void Teardown(){
         CloseBrowser();
     }

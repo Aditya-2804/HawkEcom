@@ -21,7 +21,7 @@ import static DriverActions.DriverActions.CurrentWinHandler;
 
 public class homePageTestCases extends BaseClass {
 
-    @BeforeMethod(groups = {"Smoke","Sanity","Regression"})
+    @BeforeMethod(alwaysRun = true)
     public void Setup() throws Exception{
         LaunchBrowser();
     }
@@ -30,11 +30,12 @@ public class homePageTestCases extends BaseClass {
     public yourCartPage yourCartPage;
 
 
-    public void NavidateToHomePage() throws Exception{
+    public HomePage NavidateToHomePage() throws Exception{
         loginPage = new LoginPage();
         DriverActions.waitForSeconds(3);
         loginPage.Login(Utils.getConfigUserName(),Utils.getConfigPassword());
         DriverActions.waitForSeconds(3);
+        return new HomePage();
     }
 
     @Test
@@ -48,8 +49,8 @@ public class homePageTestCases extends BaseClass {
 
     @Test(groups = "Sanity")
     public void ValidateHeader() throws Exception{
-        NavidateToHomePage();
-        homePage = new HomePage();
+
+        homePage = NavidateToHomePage();
         String[] ExpecetdMenuList={"All Items","About","Logout","Reset App State"};
         List<String> list = Arrays.asList(ExpecetdMenuList);
 
@@ -70,11 +71,11 @@ public class homePageTestCases extends BaseClass {
     @Test(groups = {"Smoke","Sanity"})
     public void VallidateSecondaryHeader() throws Exception{
 
-        NavidateToHomePage();
+        homePage =NavidateToHomePage();
         String[] expectedSortOptions = {"Name (A to Z)","Name (Z to A)","Price (low to high)","Price (high to low)"};
         List<String> ExpectedOptions = Arrays.asList(expectedSortOptions);
 
-        homePage = new HomePage();
+
         homePage.ValidateSortOptions(ExpectedOptions);
 
         Logs.info("Validating Price (low to high) Sort");
@@ -94,9 +95,9 @@ public class homePageTestCases extends BaseClass {
     @Test(groups = "Smoke")
     public void ValidateFooter() throws Exception{
 
-        NavidateToHomePage();
+        homePage = NavidateToHomePage();
         String CurrentWinHandler = CurrentWinHandler();
-        homePage = new HomePage();
+
 
         String TwitterLink = homePage.twitterlink();
         String FacebookLink = homePage.facebooklink();
@@ -130,7 +131,7 @@ public class homePageTestCases extends BaseClass {
         }
     }
 
-    @AfterMethod(groups = {"Sanity","Smoke","Regression"})
+    @AfterMethod(alwaysRun = true)
     public void Teardown(){
         CloseBrowser();
     }

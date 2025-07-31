@@ -16,12 +16,12 @@ public class CheckoutCompleteTescases extends BaseClass {
     public CheckoutOverviewPage checkoutOverviewPage;
     public CheckoutCompletePage checkoutCompletePage;
 
-    @BeforeMethod(groups = {"Sanity","Smoke","Regression"})
+    @BeforeMethod(alwaysRun = true)
     public void SetUp() throws Exception{
         LaunchBrowser();
     }
 
-    @AfterMethod(groups = {"Sanity","Smoke","Regression"})
+    @AfterMethod(alwaysRun = true)
     public void Teardown(){
         CloseBrowser();
     }

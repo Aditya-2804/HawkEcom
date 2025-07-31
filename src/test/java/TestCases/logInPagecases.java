@@ -3,11 +3,13 @@ package TestCases;
 import BaseClass.BaseClass;
 import PageObjects.LoginPage;
 import Utilities.Logs;
+import Utilities.RetrySetup;
 import Utilities.Utils;
 import com.google.common.collect.Ordering;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
+import org.testng.IRetryAnalyzer;
 import org.testng.annotations.*;
 
 import java.util.ArrayList;
@@ -18,17 +20,20 @@ public class logInPagecases extends BaseClass {
 
     public LoginPage loginPage;
 
-    @BeforeMethod(groups = {"Sanity","Smoke","Regression"})
+    @BeforeMethod(alwaysRun = true)
     public void setUp() throws Exception{
         LaunchBrowser();
     }
 
 
-    @Test(groups = "Smoke")
+    @Test(alwaysRun = true,retryAnalyzer = RetrySetup.class)
     public void ValidateLogo() throws Exception{
 
         loginPage = new LoginPage();
         loginPage.ValidateLogoCssValues();
+//        loginPage.ValidateTitle("Swag Labsss");
+//        loginPage.ValidateUserNamePlaceholder("Usernuume");
+//        loginPage.ValidatePasswordPlaceholder("Passwortd");
 
         loginPage.ValidateTitle("Swag Labs");
         loginPage.ValidateUserNamePlaceholder("Username");
@@ -59,20 +64,20 @@ public class logInPagecases extends BaseClass {
 //
 //    }
 //
-@Test(groups = "Sanity")
+@Test(alwaysRun = true)
 public void ValidateAccepedUsersAndPasswordslabel(){
         loginPage = new LoginPage();
         loginPage.validateUsernameAcceptedLabel("Accepted usernames are:");
         loginPage.validatePasswordAcceptedLabel("Password for all users:");
     }
 
-@Test(dependsOnMethods = "ValidateAccepedUsersAndPasswordslabel",groups = {"Sanity","Smoke"})
+@Test(dependsOnMethods = "ValidateAccepedUsersAndPasswordslabel",alwaysRun = true)
 public void Login() throws Exception{
         loginPage.Login(Utils.getConfigUserName(), Utils.getConfigPassword());
     }
 
 
-    @AfterMethod(groups = {"Sanity","Smoke","Regression"})
+    @AfterMethod(alwaysRun = true)
     public void Teardown(){
         CloseBrowser();
     }

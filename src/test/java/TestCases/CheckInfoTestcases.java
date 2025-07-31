@@ -5,6 +5,11 @@ import DriverActions.DriverActions;
 import PageObjects.*;
 import Utilities.Logs;
 import Utilities.Utils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -20,12 +25,12 @@ public class CheckInfoTestcases extends BaseClass {
 
 
 
-    @BeforeMethod(groups = {"Sanity","Smoke","Regression"})
+    @BeforeMethod(alwaysRun = true)
     public void Setup() throws Exception{
         LaunchBrowser();
     }
 
-    @AfterMethod(groups = {"Sanity","Smoke","Regression"})
+    @AfterMethod(alwaysRun = true)
     public void Teardown(){
         CloseBrowser();
     }
@@ -50,6 +55,35 @@ public class CheckInfoTestcases extends BaseClass {
         DriverActions.waitForSeconds(3);
 
     }
+
+//    @Test
+    public void interviewPreparation() throws Exception{
+        WebDriver driver = new EdgeDriver();
+        driver.get("https://www.google.co.in/");
+        WebElement searchGoogle = driver.findElement(By.id("APjFqb"));
+        searchGoogle.sendKeys("interview preparation");
+        searchGoogle.sendKeys(Keys.ENTER);
+
+        Thread.sleep(3*1000);
+        WebElement page3 = driver.findElement(By.xpath("//a[@aria-label='Page 3']"));
+        page3.click();
+
+        WebElement link4 = driver.findElement(By.xpath("//div[@id='rso']/div[4]//a"));
+        String url4 = link4.getAttribute("href");
+
+
+       /* Response response = RestAssured()
+       .geiven(url
+       .then
+       Asssert
+       .statuscode(200)
+
+*/
+        driver.get(url4);
+
+
+    }
+
 
     @Test(groups = "Sanity")
     public void ValidateHeader() throws Exception{

@@ -27,12 +27,12 @@ public class YourCartTestcases extends BaseClass {
 
     private CheckoutInfoPage checkoutInfoPage;
 
-    @BeforeMethod(groups = {"Sanity","Smoke","Regression"})
+    @BeforeMethod(alwaysRun = true)
     public void Setup() throws Exception{
         LaunchBrowser();
     }
 
-    @AfterMethod(groups = {"Sanity","Smoke","Regression"})
+    @AfterMethod(alwaysRun = true)
     public void Teardown(){
         CloseBrowser();
     }

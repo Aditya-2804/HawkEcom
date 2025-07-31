@@ -35,6 +35,12 @@ jobs:
       with:
         install-dependencies: true
         install-chromedriver: true
-    
+
+    - name: debugging (checking chrome permissions)
+      run: |
+        stat /opt/hostedtoolcache/setup-chrome/chrome/stable/x64
+        stat /opt/hostedtoolcache/setup-chrome/chromedriver/stable/x64
+
+
     - name: Build with Maven
       run: mvn clean test -DfileName="testng_Sanity.xml"
